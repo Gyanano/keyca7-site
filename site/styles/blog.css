@@ -1737,7 +1737,7 @@ kbd {
   margin: 0;
 }
 
-.arcade-xhs-listed {
+.arcade-item p.arcade-xhs-listed {
   margin: 3px 0 0;
   font-size: 11px;
   line-height: 1.45;
@@ -1745,6 +1745,7 @@ kbd {
   color: var(--ink-muted);
   letter-spacing: 0.02em;
   opacity: 0.88;
+  flex: none;
 }
 
 .arcade-icon {
