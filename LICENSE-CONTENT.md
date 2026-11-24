@@ -8,6 +8,7 @@
 
 - 黑猫形象与头像：`site/assets/keycat-avatar.png`、`site/assets/keycat-avatar.jpg`、`site/assets/og-image.jpg`、`site/assets/favicon-32.png`、`site/assets/apple-touch-icon.png`
 - 猫爪：`site/assets/cat-paw.png`
+- 作品图标：`site/assets/arcade/`（晚巷糖水铺、唤名、十阶）
 - 签名：`site/assets/keycat-signature.png` 及 `exports/` 下生成的签名动图
 - 「KeyCat」名称、手写签名字形及整体视觉形象
 

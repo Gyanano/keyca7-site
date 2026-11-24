@@ -7,14 +7,12 @@
       "name": "晚巷糖水铺",
       "desc": "在像素风的夜巷里，开一家自己的糖水铺。",
       "icon": {
-        "type": "glyph",
-        "text": "糖",
-        "bg": "#2f4b3c",
-        "fg": "#f4efe4"
+        "type": "image",
+        "src": "./assets/arcade/wanxiang-tangshui.png"
       },
       "href": "/play/wanxiang-tangshui/",
       "actionLabel": "开始玩",
-      "_todo": "TODO(用户提供)：图标为字形/色块占位，待换原图（改为 {\"type\": \"image\", \"src\": \"...\"}）。/play/<slug>/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库"
+      "_todo": "/play/wanxiang-tangshui/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库"
     },
     {
       "id": "huanming",
@@ -23,14 +21,12 @@
       "name": "唤名",
       "desc": "查界面术语、拼页面提示词，帮你叫出常见 UI 组件的名字。",
       "icon": {
-        "type": "glyph",
-        "text": "名",
-        "bg": "#faf6ee",
-        "fg": "#2a2622"
+        "type": "image",
+        "src": "./assets/arcade/huanming.png"
       },
       "href": "/play/huanming/",
       "actionLabel": "打开工具",
-      "_todo": "TODO(用户提供)：图标为字形/色块占位，待换原图（改为 {\"type\": \"image\", \"src\": \"...\"}）。/play/<slug>/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库"
+      "_todo": "/play/huanming/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库"
     },
     {
       "id": "shijie",
@@ -39,18 +35,12 @@
       "name": "十阶",
       "desc": "输入一个颜色，生成一套对比色阶。",
       "icon": {
-        "type": "steps",
-        "colors": [
-          "#2c2f7a",
-          "#3f45a8",
-          "#5b5fc9",
-          "#7d7bdc",
-          "#a7a2e8"
-        ]
+        "type": "image",
+        "src": "./assets/arcade/shijie.png"
       },
       "href": "/play/shijie/",
       "actionLabel": "打开工具",
-      "_todo": "TODO(用户提供)：图标为字形/色块占位，待换原图（改为 {\"type\": \"image\", \"src\": \"...\"}）。/play/<slug>/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库"
+      "_todo": "/play/shijie/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库"
     }
   ],
   "essays": [],
