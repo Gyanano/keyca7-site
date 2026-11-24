@@ -843,7 +843,7 @@ kbd {
   background: rgba(209, 75, 44, 0.06);
 }
 
-/* ---------- 横页 01：游乐场 ---------- */
+/* ---------- 横页 01：小作坊 ---------- */
 .arcade-head {
   margin-bottom: clamp(18px, 2.6vh, 28px);
 }
@@ -1717,16 +1717,34 @@ kbd {
 
 
 
-/* ---------- 游乐场：图标占位 ---------- */
+/* ---------- 小作坊：图标占位 ---------- */
 .arcade-title {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   margin-bottom: 8px;
 }
 
+.arcade-title .arcade-icon {
+  margin-top: 2px;
+}
+
+.arcade-heading {
+  min-width: 0;
+}
+
 .arcade-title h3 {
   margin: 0;
+}
+
+.arcade-xhs-listed {
+  margin: 3px 0 0;
+  font-size: 11px;
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+  opacity: 0.88;
 }
 
 .arcade-icon {

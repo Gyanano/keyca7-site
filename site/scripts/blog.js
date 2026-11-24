@@ -1,10 +1,10 @@
 /**
  * KeyCat — 无界暖宣纸 × 双幕混合演进主控脚本
  * Act I (0.00->0.34): 纵深视差开篇签名 -> 一隅键声（三段模态纯合成 + 捏角撕贴便利贴）
- * Act II (0.40->1.00): 吸顶横向宣纸长卷翻页（游乐场 -> 随笔 -> 联系与 See You. 水写布）
+ * Act II (0.40->1.00): 吸顶横向宣纸长卷翻页（小作坊 -> 随笔 -> 联系与 See You. 水写布）
  */
 
-// 页面文字内容（游乐场 / 随笔 / 社交）统一放在 site/content/site.json，启动时读取；
+// 页面文字内容（小作坊 / 随笔 / 社交）统一放在 site/content/site.json，启动时读取；
 // 这里只保留与素材绑定的 BGM 配置与空默认值。
 const SITE_DATA = {
   arcade: [],
@@ -170,7 +170,7 @@ function bootKeyCat() {
   const ICON_ARROW_UP_RIGHT = '<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>';
   const ICON_COPY = '<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>';
 
-  /* ---------- 渲染游乐场（横页 01） ---------- */
+  /* ---------- 渲染小作坊（横页 01） ---------- */
   const arcadeList = document.getElementById("arcadeList");
   const filterTabs = Array.from(document.querySelectorAll("#arcadeFilter .filter-tab"));
   let arcadeItems = [];
@@ -218,7 +218,10 @@ function bootKeyCat() {
         <li class="arcade-item">
           <div class="arcade-title">
             ${renderIcon(item.icon)}
-            <h3>${esc(item.name)}</h3>
+            <div class="arcade-heading">
+              <h3>${esc(item.name)}</h3>
+              ${item.xhsListed ? `<p class="arcade-xhs-listed">${item.cat === "game" ? "（小红书已上架小游戏）" : "（小红书已上架小工具）"}</p>` : ""}
+            </div>
           </div>
           <p>${esc(item.desc)}</p>
           <div class="arcade-foot">
@@ -927,7 +930,7 @@ function bootKeyCat() {
     scene1.classList.toggle("is-current", p1 < 0.30);
     scene2.classList.toggle("is-current", p1 >= 0.30);
 
-    // --- Act II: 游乐场 / 随笔水印柔和纵向景深视差 ---
+    // --- Act II: 小作坊 / 随笔水印柔和纵向景深视差 ---
     const vh = Math.max(1, window.innerHeight);
     if (scene3 && s3Watermark) {
       const r3 = scene3.getBoundingClientRect();

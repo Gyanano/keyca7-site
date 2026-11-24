@@ -17,7 +17,7 @@ KeyCat 的个人小站 · <https://keyca7.com>
 ```
 site/            唯一部署目录（上线的只有它）
   index.html
-  content/site.json   页面文字内容：游乐场 / 随笔 / 社交 / 便条文案
+  content/site.json   页面文字内容：小作坊 / 随笔 / 社交 / 便条文案
   scripts/ styles/ assets/
 components/      可复用组件（React 封装等，未被页面直接引用）
 docs/            产品与设计说明
@@ -38,7 +38,7 @@ python -m http.server 8080 --directory site
 
 编辑 `site/content/site.json`：
 
-- `arcade`：游乐场条目（`cat` 为 `game` 或 `tool`）。`/play/<slug>/` 下的游戏和工具不在本仓库，由同域的另一个服务提供，本地预览时这些链接会 404
+- `arcade`：小作坊条目（`cat` 为 `game` 或 `tool`）。`/play/<slug>/` 下的游戏和工具不在本仓库，由同域的另一个服务提供，本地预览时这些链接会 404
 - `essays`：随笔（`title` / `summary` / `body[]` / `quote` / `date` / `readTime`），为空时页面显示空状态
 - `socials`：社交账号
 
@@ -57,4 +57,4 @@ python -m http.server 8080 --directory site
 
 欢迎学习、修改并使用代码。若 fork 或二次发布，请替换上述品牌形象、自制图片与文案，换成你自己的素材，不要把本站换个名字直接上线。
 
-黑猫形象、头像、猫爪、签名和游乐场作品图标等二进制素材不在本公开仓库中，以免随 Git 历史被取用。这些文件放在私有仓库的 `keyca7-site-brand-assets/`，部署到 keyca7.com 时再并入 `site/assets/`。本地预览请先按 `ASSETS-LICENSE.md` 的说明拷回。
+黑猫形象、头像、猫爪、签名和小作坊作品图标等二进制素材不在本公开仓库中，以免随 Git 历史被取用。这些文件放在私有仓库的 `keyca7-site-brand-assets/`，部署到 keyca7.com 时再并入 `site/assets/`。本地预览请先按 `ASSETS-LICENSE.md` 的说明拷回。

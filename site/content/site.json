@@ -12,7 +12,8 @@
       },
       "href": "/play/wanxiang-tangshui/",
       "actionLabel": "开始玩",
-      "_todo": "/play/wanxiang-tangshui/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库"
+      "_todo": "/play/wanxiang-tangshui/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库",
+      "xhsListed": true
     },
     {
       "id": "huanming",
@@ -26,7 +27,8 @@
       },
       "href": "/play/huanming/",
       "actionLabel": "打开工具",
-      "_todo": "/play/huanming/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库"
+      "_todo": "/play/huanming/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库",
+      "xhsListed": true
     },
     {
       "id": "shijie",
@@ -40,7 +42,8 @@
       },
       "href": "/play/shijie/",
       "actionLabel": "打开工具",
-      "_todo": "/play/shijie/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库"
+      "_todo": "/play/shijie/ 由私有仓库的独立 Worker 在 keyca7.com 同域提供，不在本仓库",
+      "xhsListed": true
     }
   ],
   "essays": [
