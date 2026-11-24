@@ -190,23 +190,44 @@ function bootKeyCat() {
       return;
     }
 
+    const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+    const renderIcon = (icon) => {
+      if (!icon) return "";
+      if (icon.type === "image" && icon.src) {
+        return `<span class="arcade-icon is-image" aria-hidden="true"><img src="${esc(icon.src)}" alt="" /></span>`;
+      }
+      if (icon.type === "steps" && Array.isArray(icon.colors)) {
+        return `<span class="arcade-icon is-steps" aria-hidden="true">${icon.colors
+          .map((c) => `<i style="background:${esc(c)}"></i>`)
+          .join("")}</span>`;
+      }
+      return `<span class="arcade-icon is-glyph" aria-hidden="true" style="background:${esc(icon.bg || "#faf6ee")};color:${esc(icon.fg || "#2a2622")}">${esc(icon.text || "")}</span>`;
+    };
+    const renderActions = (item) => {
+      if (!item.href) return "";
+      return `
+              <button type="button" class="copy-link-btn" data-share-href="${esc(item.href)}" title="复制直达链接">
+                ${ICON_COPY}
+                <span>复制分享链接</span>
+              </button>
+              <a class="arcade-play" href="${esc(item.href)}" target="_blank" rel="noopener">
+                <span>${esc(item.actionLabel)}</span>
+                ${ICON_ARROW_UP_RIGHT}
+              </a>`;
+    };
+
     arcadeList.innerHTML = rows
       .map(
         (item) => `
         <li class="arcade-item">
-          <h3>${item.name}</h3>
-          <p>${item.desc}</p>
+          <div class="arcade-title">
+            ${renderIcon(item.icon)}
+            <h3>${esc(item.name)}</h3>
+          </div>
+          <p>${esc(item.desc)}</p>
           <div class="arcade-foot">
-            <span class="arcade-kind">${item.catLabel}</span>
-            <div class="arcade-actions">
-              <button type="button" class="copy-link-btn" data-share-href="${item.href}" title="复制直达链接发给小红书朋友">
-                ${ICON_COPY}
-                <span>复制分享链接</span>
-              </button>
-              <a class="arcade-play" href="${item.href}" target="_blank" rel="noopener">
-                <span>${item.actionLabel}</span>
-                ${ICON_ARROW_UP_RIGHT}
-              </a>
+            <span class="arcade-kind">${esc(item.catLabel)}</span>
+            <div class="arcade-actions">${renderActions(item)}
             </div>
           </div>
         </li>`
@@ -217,18 +238,20 @@ function bootKeyCat() {
 
     arcadeList.querySelectorAll(".copy-link-btn").forEach((btn) => {
       btn.addEventListener("click", async () => {
+        const copyText = btn.dataset.copyText;
         const rawHref = btn.dataset.shareHref || "";
-        const fullUrl = new URL(rawHref, window.location.href).href;
+        const fullUrl = copyText || new URL(rawHref, window.location.href).href;
         const label = btn.querySelector("span");
+        const idleText = copyText ? "复制名称" : "复制分享链接";
         try {
           if (navigator.clipboard?.writeText) {
             await navigator.clipboard.writeText(fullUrl);
           }
           btn.classList.add("is-copied");
-          if (label) label.textContent = "已复制链接";
+          if (label) label.textContent = copyText ? "已复制" : "已复制链接";
           setTimeout(() => {
             btn.classList.remove("is-copied");
-            if (label) label.textContent = "复制分享链接";
+            if (label) label.textContent = idleText;
           }, 1800);
         } catch {
           if (label) label.textContent = "请手动复制";
@@ -284,11 +307,9 @@ function bootKeyCat() {
           class="${cls}"
           href="${s.href}"${targetAttr}${copyAttr}
           aria-label="${s.name}: ${s.tip}"
-          title="${s.tip}"
         >
           <img class="social-seal-icon" src="${s.icon}" alt="" aria-hidden="true" />
         </a>
-        <span class="social-seal-tip">${s.tip}</span>
       </li>`;
     })
     .join('<li class="social-dot-sep" aria-hidden="true"></li>');
