@@ -18,7 +18,7 @@ KeyCat 的个人小站 · <https://keyca7.com>（尚未上线）
 site/            唯一部署目录（上线的只有它）
   index.html
   content/site.json   页面文字内容：游乐场 / 随笔 / 社交
-  scripts/ styles/ tools/ assets/
+  scripts/ styles/ assets/
 components/      可复用组件（React 封装等，未被页面直接引用）
 docs/            产品与设计说明
 scripts/         开发脚本（签名 GIF 生成）
