@@ -609,7 +609,7 @@ kbd {
 /* ---------- 真实纸张层叠便条：独立底层阴影 + 捏角 3D 剥离 ---------- */
 .sticky-note-wrap {
   position: absolute;
-  width: clamp(220px, 19vw, 260px);
+  width: clamp(210px, 17.6vw, 246px);
   z-index: 16;
   translate: 0 var(--py, 0px);
   perspective: 760px;
@@ -697,6 +697,24 @@ kbd {
 
 .note-spring .desk-note {
   background-color: #f9efe4;
+}
+
+.note-mid-left {
+  top: clamp(368px, 48vh, 455px);
+  left: clamp(18px, 3vw, 44px);
+}
+
+.note-mid-left .desk-note {
+  background-color: #f4ead8;
+}
+
+.note-mid-right {
+  bottom: clamp(168px, 22vh, 228px);
+  right: clamp(16px, 2vw, 32px);
+}
+
+.note-mid-right .desk-note {
+  background-color: #f7f0e2;
 }
 
 .note-head {
@@ -1414,8 +1432,16 @@ kbd {
     right: 26px;
   }
   .note-spring {
-    bottom: 24px;
-    left: 28px;
+    bottom: 22px;
+    left: 22px;
+  }
+  .note-mid-left {
+    top: 268px;
+    left: 16px;
+  }
+  .note-mid-right {
+    bottom: 176px;
+    right: 18px;
   }
   .contact-atelier {
     gap: 32px;

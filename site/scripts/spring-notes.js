@@ -26,9 +26,9 @@
         if (!note) return;
 
         const baseRot = parseFloat(wrap.dataset.rot || "0");
-        const homeX = (Math.random() - 0.5) * 32;
-        const homeY = (Math.random() - 0.5) * 24;
-        const homeRot = baseRot + (Math.random() - 0.5) * 4.8;
+        const homeX = (Math.random() - 0.5) * 18;
+        const homeY = (Math.random() - 0.5) * 12;
+        const homeRot = baseRot + (Math.random() - 0.5) * 3.6;
 
         const state = {
           wrap,
