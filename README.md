@@ -38,7 +38,7 @@ python -m http.server 8080 --directory site
 
 编辑 `site/content/site.json`：
 
-- `arcade`：游乐场条目（`cat` 为 `game` 或 `tool`）。`/play/<slug>/` 下的小游戏和小工具不在本仓库，由同域的另一个服务提供，本地预览时这些链接会 404
+- `arcade`：游乐场条目（`cat` 为 `game` 或 `tool`）。`/play/<slug>/` 下的游戏和工具不在本仓库，由同域的另一个服务提供，本地预览时这些链接会 404
 - `essays`：随笔（`title` / `summary` / `body[]` / `quote` / `date` / `readTime`），为空时页面显示空状态
 - `socials`：社交账号
 

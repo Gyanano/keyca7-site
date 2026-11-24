@@ -3,7 +3,7 @@
     {
       "id": "wanxiang-tangshui",
       "cat": "game",
-      "catLabel": "小游戏",
+      "catLabel": "游戏",
       "name": "晚巷糖水铺",
       "desc": "在像素风的夜巷里，开一家自己的糖水铺。",
       "icon": {
@@ -17,7 +17,7 @@
     {
       "id": "huanming",
       "cat": "tool",
-      "catLabel": "小工具",
+      "catLabel": "工具",
       "name": "唤名",
       "desc": "查界面术语、拼页面提示词，帮你叫出常见 UI 组件的名字。",
       "icon": {
@@ -31,7 +31,7 @@
     {
       "id": "shijie",
       "cat": "tool",
-      "catLabel": "小工具",
+      "catLabel": "工具",
       "name": "十阶",
       "desc": "输入一个颜色，生成一套对比色阶。",
       "icon": {
