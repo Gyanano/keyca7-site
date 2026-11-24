@@ -1,6 +1,6 @@
 # keyca7-site
 
-KeyCat 的个人小站 · <https://keyca7.com>（尚未上线）
+KeyCat 的个人小站 · <https://keyca7.com>
 
 一只戴细框眼镜的黑猫，在纸与键帽之间，写一点关于 AI 的念头，也顺手敲些小东西。
 
@@ -17,7 +17,7 @@ KeyCat 的个人小站 · <https://keyca7.com>（尚未上线）
 ```
 site/            唯一部署目录（上线的只有它）
   index.html
-  content/site.json   页面文字内容：游乐场 / 随笔 / 社交
+  content/site.json   页面文字内容：游乐场 / 随笔 / 社交 / 便条文案
   scripts/ styles/ assets/
 components/      可复用组件（React 封装等，未被页面直接引用）
 docs/            产品与设计说明
@@ -49,8 +49,12 @@ python -m http.server 8080 --directory site
 
 ## 授权
 
-- 代码：MIT（`LICENSE`）
-- 文字内容：CC BY-NC-ND 4.0；KeyCat 形象、头像、猫爪与签名：保留所有权利（`LICENSE-CONTENT.md`）
-- 第三方素材：见 `CREDITS.md`
+本仓库采用双重许可，详见 `LICENSE`：
 
-欢迎学习和借鉴实现；请不要换个名字直接套用本站的形象与整体设计。
+- **代码**（HTML / CSS / JavaScript / 脚本 / 配置）：MIT
+- **个人品牌与内容素材**：保留所有权利（All Rights Reserved）。包括 KeyCat 黑猫形象及所有猫图 / 头像、插画、`site/assets` 下的自制图片与图标、随笔文章与便条文案、KeyCat 名称与标识。文件清单见 `ASSETS-LICENSE.md`
+- **第三方字体与素材**：遵循各自原许可，见 `CREDITS.md`
+
+欢迎学习、修改并使用代码。若 fork 或二次发布，请替换上述品牌形象、自制图片与文案，换成你自己的素材，不要把本站换个名字直接上线。
+
+黑猫形象、头像、猫爪、签名和游乐场作品图标等二进制素材不在本公开仓库中，以免随 Git 历史被取用。这些文件放在私有仓库的 `keyca7-site-brand-assets/`，部署到 keyca7.com 时再并入 `site/assets/`。本地预览请先按 `ASSETS-LICENSE.md` 的说明拷回。

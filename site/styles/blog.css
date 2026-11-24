@@ -843,7 +843,7 @@ kbd {
   background: rgba(209, 75, 44, 0.06);
 }
 
-/* ---------- 横页 01：小红书游乐场 ---------- */
+/* ---------- 横页 01：游乐场 ---------- */
 .arcade-head {
   margin-bottom: clamp(18px, 2.6vh, 28px);
 }
@@ -1555,7 +1555,7 @@ kbd {
   .scene-atelier {
     order: 3;
     padding-top: 12px;
-    padding-bottom: 132px;
+    padding-bottom: 88px;
     gap: 18px;
   }
   .cat-switch-callout {
@@ -1573,18 +1573,12 @@ kbd {
   .mobile-only {
     display: inline;
   }
-  .note-action {
-    display: none;
+  .atelier-hint {
+    padding-right: 100px;
   }
-  .sticky-note-wrap {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    bottom: auto;
-    width: 100%;
-    transform: none !important;
-    translate: none;
+  .sticky-note-wrap,
+  .note-action {
+    display: none !important;
   }
   .sticky-shadow {
     display: none;

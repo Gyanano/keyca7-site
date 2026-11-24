@@ -35,3 +35,15 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# KeyCat 个人品牌素材（保留所有权利，不进入公开仓库；部署时从私有目录并入）
+site/assets/keycat-avatar.png
+site/assets/keycat-avatar.jpg
+site/assets/og-image.jpg
+site/assets/favicon-32.png
+site/assets/apple-touch-icon.png
+site/assets/cat-paw.png
+site/assets/keycat-signature.png
+site/assets/arcade/wanxiang-tangshui.png
+site/assets/arcade/huanming.png
+site/assets/arcade/shijie.png

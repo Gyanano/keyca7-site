@@ -1,3 +1,13 @@
+本仓库采用双重许可。
+
+1. 代码（HTML、CSS、JavaScript、脚本与配置文件）以 MIT License 授权，全文见下方。
+2. 个人品牌与内容素材保留所有权利（All Rights Reserved），包括 KeyCat 黑猫形象及所有猫图 / 头像、插画、site/assets 下的自制图片与图标、随笔文章与便条文案、KeyCat 名称与标识。具体目录与文件见 ASSETS-LICENSE.md。
+3. 第三方字体与素材遵循各自原许可，见 CREDITS.md。
+
+未经权利人书面许可，不得将第 2 类素材用于自己的网站、产品或再分发。欢迎学习、修改并使用本仓库的代码，但 fork 或二次发布时请替换上述品牌与内容素材。
+
+---
+
 MIT License
 
 Copyright (c) 2026 KeyCat
@@ -19,7 +29,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-本 MIT 许可只覆盖源代码（HTML / CSS / JavaScript / TSX / Python）。
-文字内容与 KeyCat 品牌素材的授权见 LICENSE-CONTENT.md；第三方素材见 CREDITS.md。
