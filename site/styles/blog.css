@@ -700,16 +700,14 @@ kbd {
 }
 
 .note-head {
-  font-size: 14px;
-  color: var(--ink);
-  margin-bottom: 6px;
+  display: none;
 }
 
 .desk-note p {
   margin: 0;
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--ink-soft);
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--ink);
 }
 
 .note-action {

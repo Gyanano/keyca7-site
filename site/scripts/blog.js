@@ -403,15 +403,20 @@ function bootKeyCat() {
       return source[Math.floor(Math.random() * source.length)];
     };
 
+    // 渲染时加外层中文双引号“”；句中若已有“”，改成「」以免套叠难看。数据原文不动。
+    const formatDeskQuote = (text) => {
+      const raw = String(text || "").trim();
+      const inner = raw.replaceAll("“", "「").replaceAll("”", "」");
+      return `“${inner}”`;
+    };
+
     const applyNote = (wrap, entry, prevId) => {
-      const head = wrap.querySelector(".note-head");
       const body = wrap.querySelector(".desk-note p");
       if (!entry || !body) return;
       if (prevId) used.delete(prevId);
       used.add(entry.id);
       wrap.dataset.noteId = entry.id;
-      if (head) head.textContent = entry.label || "";
-      body.textContent = entry.text;
+      body.textContent = formatDeskQuote(entry.text);
     };
 
     wraps.forEach((wrap) => {
