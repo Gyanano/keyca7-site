@@ -68,11 +68,14 @@
           </div>
         </section>
 
-        <!-- 第二幕：键猫与声（无界轴体 + 错落无框短评 + 拟真捏角撕贴便利贴） -->
-        <section class="scene scene-atelier" id="scene-2" aria-label="键猫与声交互工坊">
+        <!-- 第二幕：一隅键声（无界轴体 + 书桌便条短句 + 拟真捏角撕贴便利贴） -->
+        <section class="scene scene-atelier" id="scene-2" aria-label="一隅键声交互工坊">
         <div class="atelier-head" id="s2Head">
-          <h2>键猫与声</h2>
-          <p class="atelier-intro">你好，我是 KeyCat —— 一只戴细框眼镜的黑猫，在纸与键帽之间，写一点关于 AI 的念头，也顺手敲些小东西。</p>
+          <h2>一隅键声</h2>
+          <p class="atelier-intro">
+            <span class="intro-greet">你好，我是 KeyCat</span>
+            <span class="intro-bio">一只戴细框眼镜的黑猫，在纸与键帽之间，写一点关于 AI 的念头，也顺手敲些小东西。</span>
+          </p>
         </div>
 
         <!-- 无界、无竖线、双行微错落的当前轴体特性随记 -->
@@ -97,33 +100,33 @@
             <span class="sw-telemetry" id="switchTelemetry">62g · 敲击 00</span>
           </div>
           <p class="atelier-hint">
-            <span class="desktop-only">点击黑猫键帽或按 <kbd>Space</kbd> 试听 · 左右箭头 / <kbd>1</kbd>–<kbd>4</kbd> 换轴 · 捏住便条任一角即可撕起重贴</span>
-            <span class="mobile-only">轻敲黑猫键帽试听，左右箭头切换四款轴体与水墨涟漪色系。</span>
+            <span class="desktop-only">点击黑猫键帽或按 <kbd>Space</kbd> 试听 · 左右箭头 / <kbd>1</kbd>–<kbd>4</kbd> 换轴 · 点击便条可换一句，捏住任一角即可撕起重贴</span>
+            <span class="mobile-only">轻敲黑猫键帽试听，点便条可换一句。左右箭头切换四款轴体与水墨涟漪色系。</span>
           </p>
         </div>
 
-        <!-- 3 张独立外层阴影与真实纸角微翘便利贴 -->
+        <!-- 3 张独立外层阴影与真实纸角微翘便利贴；正文由 site.json 的 deskNotes 在载入时随机填入 -->
         <div class="sticky-note-wrap note-brush" data-rot="-3.2" data-py-rate="1.26">
           <div class="sticky-shadow" aria-hidden="true"></div>
           <article class="desk-note">
-            <div class="note-head">三十四毫笔刷</div>
-            <p>不使用遮罩与静态图片，沿贝塞尔路径实时分发三十四根笔毫的蓄墨与飞白，落笔只写一遍。</p>
+            <div class="note-head">向内沉淀</div>
+            <p>在算法狂奔的时代，慢下来打磨心性，反而成了最稀缺的效率。</p>
           </article>
         </div>
 
         <div class="sticky-note-wrap note-shader" data-rot="2.6" data-py-rate="1.60">
           <div class="sticky-shadow" aria-hidden="true"></div>
           <article class="desk-note">
-            <div class="note-head">宣纸多色水墨</div>
-            <p id="shaderStatusCopy">轻敲不同机械轴体，纸面即泛出对应矿物墨色涟漪；每颗键音均由三段物理模态纯合成。</p>
+            <div class="note-head">链接</div>
+            <p>工具本身没有温度，直到你的代码在某个时刻，恰好接住了另一个人的困惑。</p>
           </article>
         </div>
 
         <div class="sticky-note-wrap note-spring" data-rot="-2.0" data-py-rate="1.40">
           <div class="sticky-shadow" aria-hidden="true"></div>
           <article class="desk-note">
-            <div class="note-head">捏角撕起 · 任意贴</div>
-            <p>捏住纸张任一角轻轻拉开，便会从该角先翘起剥离，松手即自上而下贴稳在桌面新位置。</p>
+            <div class="note-head">一句话</div>
+            <p>不赶路，只赶心。</p>
             <button type="button" class="note-action" id="resetNotesBtn">整理归位</button>
           </article>
         </div>

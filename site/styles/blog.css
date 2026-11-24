@@ -448,7 +448,7 @@ kbd {
   }
 }
 
-/* ---------- 第二幕：键猫与声 ---------- */
+/* ---------- 第二幕：一隅键声 ---------- */
 .scene-atelier {
   --sw-color: #c84326;
   display: flex;
@@ -475,10 +475,23 @@ kbd {
 
 .atelier-intro {
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
   font-size: clamp(14.5px, 1.1vw, 16px);
   line-height: 1.85;
   color: var(--ink-soft);
   text-wrap: pretty;
+}
+
+.intro-greet,
+.intro-bio {
+  display: block;
+}
+
+.intro-bio {
+  max-width: 42em;
 }
 
 /* 真正无界：无左竖线、斜放错落双行轴体特性随记 */
@@ -596,7 +609,7 @@ kbd {
 /* ---------- 真实纸张层叠便条：独立底层阴影 + 捏角 3D 剥离 ---------- */
 .sticky-note-wrap {
   position: absolute;
-  width: clamp(206px, 17.5vw, 244px);
+  width: clamp(220px, 19vw, 260px);
   z-index: 16;
   translate: 0 var(--py, 0px);
   perspective: 760px;
@@ -1389,7 +1402,7 @@ kbd {
     left: calc(50% + clamp(114px, 10.5vw, 150px));
   }
   .sticky-note-wrap {
-    width: 194px;
+    width: 210px;
   }
   .desk-note {
     padding: 17px 14px 13px;
@@ -1518,6 +1531,7 @@ kbd {
   .scene-atelier {
     order: 3;
     padding-top: 12px;
+    padding-bottom: 132px;
     gap: 18px;
   }
   .cat-switch-callout {
@@ -1535,7 +1549,7 @@ kbd {
   .mobile-only {
     display: inline;
   }
-  .note-spring {
+  .note-action {
     display: none;
   }
   .sticky-note-wrap {
@@ -1553,7 +1567,7 @@ kbd {
   }
   .desk-note {
     transform: none !important;
-    cursor: default;
+    cursor: pointer;
     background: transparent !important;
     border: none;
     border-top: 1px solid var(--line);

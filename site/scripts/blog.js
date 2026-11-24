@@ -1,6 +1,6 @@
 /**
  * KeyCat — 无界暖宣纸 × 双幕混合演进主控脚本
- * Act I (0.00->0.34): 纵深视差开篇签名 -> 键猫与声（三段模态纯合成 + 捏角撕贴便利贴）
+ * Act I (0.00->0.34): 纵深视差开篇签名 -> 一隅键声（三段模态纯合成 + 捏角撕贴便利贴）
  * Act II (0.40->1.00): 吸顶横向宣纸长卷翻页（游乐场 -> 随笔 -> 联系与 See You. 水写布）
  */
 
@@ -10,6 +10,7 @@ const SITE_DATA = {
   arcade: [],
   essays: [],
   socials: [],
+  deskNotes: [],
 
   bgmTracks: [
     {
@@ -163,11 +164,6 @@ function bootKeyCat() {
   const finaleBrush = window.KeyCatFinaleBrush
     ? new window.KeyCatFinaleBrush(document.getElementById("finaleBrushCanvas"), () => shader)
     : null;
-
-  const shaderStatusCopy = document.getElementById("shaderStatusCopy");
-  if (shaderStatusCopy && shader && !shader.isWebGL()) {
-    shaderStatusCopy.textContent = "当前环境已平滑降级为宣纸静态纹理模式，保持多色墨韵涟漪与捏角撕贴便利贴。";
-  }
 
   /* ---------- UI 线框小图标 ---------- */
   const ICON_ARROW_RIGHT = '<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
@@ -392,6 +388,53 @@ function bootKeyCat() {
   catBridge.addEventListener("click", () => triggerKeycapAction(catBridge));
   document.getElementById("resetNotesBtn")?.addEventListener("click", () => notes?.resetAll());
 
+  /* ---------- 书桌便条：从 deskNotes 池按便条位数随机抽取，点击再换一句 ---------- */
+  function initDeskNotes() {
+    const wraps = Array.from(document.querySelectorAll(".sticky-note-wrap"));
+    const pool = Array.isArray(SITE_DATA.deskNotes) ? SITE_DATA.deskNotes.filter((n) => n && n.text) : [];
+    if (!wraps.length || !pool.length) return;
+
+    const used = new Set();
+
+    const pickUnused = (exceptId) => {
+      const available = pool.filter((n) => n.id !== exceptId && !used.has(n.id));
+      const fallback = pool.filter((n) => n.id !== exceptId);
+      const source = available.length ? available : (fallback.length ? fallback : pool);
+      return source[Math.floor(Math.random() * source.length)];
+    };
+
+    const applyNote = (wrap, entry, prevId) => {
+      const head = wrap.querySelector(".note-head");
+      const body = wrap.querySelector(".desk-note p");
+      if (!entry || !body) return;
+      if (prevId) used.delete(prevId);
+      used.add(entry.id);
+      wrap.dataset.noteId = entry.id;
+      if (head) head.textContent = entry.label || "";
+      body.textContent = entry.text;
+    };
+
+    wraps.forEach((wrap) => {
+      applyNote(wrap, pickUnused(null), null);
+
+      let press = null;
+      wrap.addEventListener("pointerdown", (e) => {
+        if (e.target.closest("button, a")) return;
+        press = { x: e.clientX, y: e.clientY, id: e.pointerId };
+      });
+      wrap.addEventListener("pointerup", (e) => {
+        if (!press || press.id !== e.pointerId) return;
+        const dist = Math.hypot(e.clientX - press.x, e.clientY - press.y);
+        press = null;
+        if (e.target.closest("button, a")) return;
+        if (dist >= 12) return;
+        const currentId = wrap.dataset.noteId;
+        applyNote(wrap, pickUnused(currentId), currentId);
+      });
+    });
+  }
+  initDeskNotes();
+
   /* ---------- 唯一黑猫爪黑胶唱片背景音乐开关（点击猫爪才播放） + 换碟动画 ---------- */
   const bgmAudio = document.getElementById("bgmAudio");
   const bgmTurntable = document.getElementById("bgmTurntable");
@@ -406,6 +449,7 @@ function bootKeyCat() {
   let toastTimer = null;
   let fadeRaf = null;
   let audioStarted = false;
+  let userMutedBgm = false;
 
   tracks.forEach((t) => {
     const img = new Image();
@@ -471,15 +515,29 @@ function bootKeyCat() {
       .catch(() => false);
   }
 
-  function armAutoplayUnlock() {
+  function unlockAudioContext() {
+    audio?.unlock?.();
+  }
+
+  function startBgmFromGesture() {
+    if (userMutedBgm || isSwappingDisc) return Promise.resolve(false);
+    if (isBgmPlaying && audioStarted) return Promise.resolve(true);
+    setTurntableUI(true);
+    return tryStartBgm();
+  }
+
+  // 首次手势：解锁 AudioContext，并自动取消静音开始播放 BGM。
+  // 不在没有手势时强行出声（会被浏览器拦截）。用户之后仍可用右下角唱片开关静音。
+  function armFirstGestureUnlock() {
     const unlock = (e) => {
+      unlockAudioContext();
       if (e.target?.closest?.("#bgmTurntable, .bgm-swap-cluster")) return;
-      if (!isBgmPlaying || audioStarted) {
+      if (userMutedBgm) {
         cleanup();
         return;
       }
-      tryStartBgm().then((ok) => {
-        if (ok) cleanup();
+      startBgmFromGesture().then((ok) => {
+        if (ok || userMutedBgm) cleanup();
       });
     };
     const cleanup = () => {
@@ -489,7 +547,7 @@ function bootKeyCat() {
     };
     window.addEventListener("pointerdown", unlock, { passive: true });
     window.addEventListener("keydown", unlock, { passive: true });
-    window.addEventListener("touchstart", unlock, { passive: true });
+    window.addEventListener("touchstart", unlock, { passive: true, capture: true });
   }
 
   async function swapToNextTrack() {
@@ -512,7 +570,7 @@ function bootKeyCat() {
       showTrackToast(2600);
       if (wasPlaying) {
         const ok = await tryStartBgm();
-        if (!ok) armAutoplayUnlock();
+        if (!ok) armFirstGestureUnlock();
       }
       bgmTurntable.classList.remove("is-swapping");
       if (bgmSwapBtn) bgmSwapBtn.disabled = false;
@@ -561,7 +619,7 @@ function bootKeyCat() {
       setTurntableUI(true);
       bgmTurntable.classList.remove("is-grabbing");
       const ok = await tryStartBgm();
-      if (!ok) armAutoplayUnlock();
+      if (!ok) armFirstGestureUnlock();
     } else {
       // 原本未播放：新碟到位后松开猫爪回到静止位，保持静音
       bgmTurntable.classList.remove("is-grabbing");
@@ -589,14 +647,22 @@ function bootKeyCat() {
 
     if (!bgmAudio) return;
     if (next) {
+      userMutedBgm = false;
+      unlockAudioContext();
       const ok = await tryStartBgm();
-      if (!ok) setTurntableUI(false);
+      if (!ok) {
+        setTurntableUI(false);
+        armFirstGestureUnlock();
+      }
     } else {
+      userMutedBgm = true;
       fadeAudioVolume(0, 320, () => {
         if (!isBgmPlaying) bgmAudio.pause();
       });
     }
   });
+
+  armFirstGestureUnlock();
 
   // 指针点击按钮或链接后释放焦点，避免键盘触发时残留选中框或误触
   document.addEventListener("click", (e) => {
@@ -824,7 +890,7 @@ function bootKeyCat() {
     const act1Max = getAct1Max();
     const p1 = clamp01(y / act1Max);
 
-    // --- Act I: 纵深视差开篇签名 (0.00) -> 键猫与声 (0.56..1.00 稳态展示，随后自然上滑离场) ---
+    // --- Act I: 纵深视差开篇签名 (0.00) -> 一隅键声 (0.56..1.00 稳态展示，随后自然上滑离场) ---
     const s1Fade = smoothstep(0.06, 0.44, p1);
     scene1.style.opacity = String(Math.max(0.03, 1 - s1Fade * 0.97).toFixed(3));
     brushStage.style.opacity = String(lerp(1, 0.025, s1Fade).toFixed(3));
@@ -1109,7 +1175,7 @@ async function loadSiteContent() {
     const res = await fetch("./content/site.json", { cache: "no-cache" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    ["arcade", "essays", "socials"].forEach((key) => {
+    ["arcade", "essays", "socials", "deskNotes"].forEach((key) => {
       if (Array.isArray(data[key])) SITE_DATA[key] = data[key];
     });
   } catch (err) {

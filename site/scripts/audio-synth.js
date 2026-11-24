@@ -91,6 +91,11 @@
       return this.enabled;
     }
 
+    // Resume/create AudioContext inside a user gesture so later key sounds can play.
+    unlock() {
+      return this._ensureContext();
+    }
+
     _nextRand() {
       this.lcgState = (Math.imul(this.lcgState, 1664525) + 1013904223) >>> 0;
       return this.lcgState / 4294967296;
