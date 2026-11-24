@@ -1,0 +1,39 @@
+{
+  "arcade": [
+    {
+      "id": "signature-studio",
+      "cat": "tool",
+      "catLabel": "小工具",
+      "name": "笔刷签名工坊",
+      "desc": "在线调整笔锋粗细、蓄墨与飞白速率，生成属于你自己的暖宣纸手写签名。",
+      "href": "./tools/signature-studio.html",
+      "actionLabel": "打开工具"
+    },
+    {
+      "id": "keycap-synth",
+      "cat": "tool",
+      "catLabel": "小工具",
+      "name": "键轴声音实验室",
+      "desc": "无需外接麦克风，直接在网页用 Web Audio 调制清脆、沉稳、轻弹的键帽声学。",
+      "href": "./tools/keycap-synth.html",
+      "actionLabel": "调音体验"
+    }
+  ],
+  "essays": [],
+  "socials": [
+    {
+      "id": "xiaohongshu",
+      "name": "小红书",
+      "tip": "小红书 · KeyCat",
+      "icon": "./assets/icon-xiaohongshu.svg",
+      "href": "https://www.xiaohongshu.com/user/profile/6a7b0acf0000000013021400"
+    },
+    {
+      "id": "x",
+      "name": "X",
+      "tip": "X · @saltor_ai",
+      "icon": "./assets/icon-x.svg",
+      "href": "https://x.com/saltor_ai"
+    }
+  ]
+}

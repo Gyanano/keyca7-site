@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KeyCat — 纸与键帽之间</title>
+  <!-- TODO(用户提供)：站点简介 description，以下为中性占位 -->
+  <meta name="description" content="KeyCat 的个人小站：一只戴细框眼镜的黑猫，在纸与键帽之间，写一点关于 AI 的念头，也顺手敲些小东西。" />
+  <meta name="theme-color" content="#f4efe4" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="KeyCat" />
+  <meta property="og:title" content="KeyCat — 纸与键帽之间" />
+  <meta property="og:description" content="KeyCat 的个人小站：一只戴细框眼镜的黑猫，在纸与键帽之间，写一点关于 AI 的念头，也顺手敲些小东西。" />
+  <meta property="og:url" content="https://keyca7.com/" />
+  <meta property="og:image" content="https://keyca7.com/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="stylesheet" href="./assets/fonts/lxgwwenkaiscreen.css" />
+  <link rel="stylesheet" href="./styles/blog.css" />
+  <script src="./keycat-brush.js"></script>
+  <script defer src="./scripts/paper-shader.js"></script>
+  <script defer src="./scripts/audio-synth.js"></script>
+  <script defer src="./scripts/spring-notes.js"></script>
+  <script defer src="./scripts/finale-brush.js"></script>
+  <script defer src="./scripts/blog.js"></script>
+</head>
+<body class="stage-active">
+  <canvas id="paper-gl-canvas" aria-hidden="true"></canvas>
+  <canvas id="spark-canvas" aria-hidden="true"></canvas>
+
+  <header class="masthead">
+    <a class="mark" href="#scene-1" data-scene-jump="0">KeyCat</a>
+    <nav class="nav-group" aria-label="主导航">
+      <a class="nav-link" href="#scene-3" data-scene-jump="2" data-nav-part="arcade">游乐场</a>
+      <a class="nav-link" href="#scene-4" data-scene-jump="3" data-nav-part="essays">随笔</a>
+      <a class="nav-link" href="#scene-5" data-scene-jump="4" data-nav-part="contact">联系</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="stage-runway">
+      <div class="cinema-stage" id="cinemaStage">
+        <!-- 跨幕共享主角：黑猫与 AI 键帽（幕 01 地平潜伏，滑入幕 02 升至舞台中央） -->
+        <button type="button" class="cat-bridge" id="catBridge" aria-label="敲击黑猫爪下的 AI 键帽，触发轴音与墨韵涟漪">
+          <img src="./assets/keycat-avatar.png" alt="戴细框眼镜的黑猫按着一颗橙红 AI 机械键帽" />
+        </button>
+
+        <!-- 第一幕：纯粹落墨开篇（仅首次载入播放一次） -->
+        <section class="scene scene-opening is-current" id="scene-1" aria-label="开篇签名">
+          <div class="brush-stage" id="brushStage">
+            <keycat-brush
+              id="heroBrush"
+              mode="one-stroke"
+              color="#d14b2c"
+              bg="transparent"
+              duration="3.6"
+              delay="0.95"
+              easing="accelerate"
+              thickness="1.08"
+              dryness="0.45"
+              autoplay
+            ></keycat-brush>
+          </div>
+
+          <div class="turntable-hint" id="bgmHint" aria-hidden="true">
+            <span class="hint-text">戳猫爪 · 听歌 / 静音</span>
+            <img class="hint-arrow" src="./assets/arrow-loop-hint.svg" alt="" />
+          </div>
+        </section>
+
+        <!-- 第二幕：键猫与声（无界轴体 + 错落无框短评 + 拟真捏角撕贴便利贴） -->
+        <section class="scene scene-atelier" id="scene-2" aria-label="键猫与声交互工坊">
+        <div class="atelier-head" id="s2Head">
+          <h2>键猫与声</h2>
+          <p class="atelier-intro">你好，我是 KeyCat —— 一只戴细框眼镜的黑猫，在纸与键帽之间，写一点关于 AI 的念头，也顺手敲些小东西。</p>
+        </div>
+
+        <!-- 无界、无竖线、双行微错落的当前轴体特性随记 -->
+        <aside class="cat-switch-callout" id="switchCallout" aria-live="polite">
+          <span class="callout-tag" id="switchTag">62g · 线性重闷</span>
+          <p class="callout-note" id="switchDesc">PBT 腔体共鸣，像麻将轻碰</p>
+        </aside>
+
+        <!-- 无界轴体切换器：无外框容器，位于黑猫下方 -->
+        <div class="atelier-dock-anchor" id="s2SwitchWrap">
+          <div class="switch-rail" role="group" aria-label="机械轴体切换">
+            <button type="button" class="switch-arrow-btn" id="switchPrev" aria-label="切换上一款轴体">
+              <img src="./assets/arrow-hand-left.svg" alt="" />
+            </button>
+            <span class="switch-title" id="switchName">麻将音 Thock</span>
+            <button type="button" class="switch-arrow-btn" id="switchNext" aria-label="切换下一款轴体">
+              <img src="./assets/arrow-hand-right.svg" alt="" />
+            </button>
+          </div>
+          <div class="scope-boundless">
+            <canvas id="oscilloscope" width="184" height="32" aria-label="键轴实时声波"></canvas>
+            <span class="sw-telemetry" id="switchTelemetry">62g · 敲击 00</span>
+          </div>
+          <p class="atelier-hint">
+            <span class="desktop-only">点击黑猫键帽或按 <kbd>Space</kbd> 试听 · 左右箭头 / <kbd>1</kbd>–<kbd>4</kbd> 换轴 · 捏住便条任一角即可撕起重贴</span>
+            <span class="mobile-only">轻敲黑猫键帽试听，左右箭头切换四款轴体与水墨涟漪色系。</span>
+          </p>
+        </div>
+
+        <!-- 3 张独立外层阴影与真实纸角微翘便利贴 -->
+        <div class="sticky-note-wrap note-brush" data-rot="-3.2" data-py-rate="1.26">
+          <div class="sticky-shadow" aria-hidden="true"></div>
+          <article class="desk-note">
+            <div class="note-head">三十四毫笔刷</div>
+            <p>不使用遮罩与静态图片，沿贝塞尔路径实时分发三十四根笔毫的蓄墨与飞白，落笔只写一遍。</p>
+          </article>
+        </div>
+
+        <div class="sticky-note-wrap note-shader" data-rot="2.6" data-py-rate="1.60">
+          <div class="sticky-shadow" aria-hidden="true"></div>
+          <article class="desk-note">
+            <div class="note-head">宣纸多色水墨</div>
+            <p id="shaderStatusCopy">轻敲不同机械轴体，纸面即泛出对应矿物墨色涟漪；每颗键音均由三段物理模态纯合成。</p>
+          </article>
+        </div>
+
+        <div class="sticky-note-wrap note-spring" data-rot="-2.0" data-py-rate="1.40">
+          <div class="sticky-shadow" aria-hidden="true"></div>
+          <article class="desk-note">
+            <div class="note-head">捏角撕起 · 任意贴</div>
+            <p>捏住纸张任一角轻轻拉开，便会从该角先翘起剥离，松手即自上而下贴稳在桌面新位置。</p>
+            <button type="button" class="note-action" id="resetNotesBtn">整理归位</button>
+          </article>
+        </div>
+      </section>
+      </div>
+    </div>
+
+    <!-- 第二乐章：自然纵向宣纸延展区（支持游乐场、随笔内容无限扩展） -->
+    <div class="editorial-flow" id="editorialFlow">
+      <!-- 第三幕：小红书游乐场 -->
+      <section class="flow-section scene-arcade" id="scene-3" aria-label="小红书游乐场">
+        <div class="scene-shell">
+          <img
+            class="folio-watermark folio-watermark-arcade"
+            id="s3Watermark"
+            src="./assets/watermark-arcade.svg"
+            alt=""
+            aria-hidden="true"
+          />
+          <header class="section-head arcade-head" id="s3Head">
+            <div class="head-inline">
+              <h2>游乐场</h2>
+              <span class="placeholder-tag">小红书 KeyCat</span>
+            </div>
+            <p class="section-aside">从小红书找过来的朋友，可以直接挑一个玩。</p>
+          </header>
+
+          <div class="arcade-filter" id="arcadeFilter" role="tablist" aria-label="游乐场分类筛选">
+            <button type="button" class="filter-tab is-active" data-cat="all" role="tab" aria-selected="true">全部</button>
+            <button type="button" class="filter-tab" data-cat="game" role="tab" aria-selected="false">小游戏</button>
+            <button type="button" class="filter-tab" data-cat="tool" role="tab" aria-selected="false">小工具</button>
+          </div>
+
+          <ul class="arcade-grid" id="arcadeList"></ul>
+        </div>
+      </section>
+
+      <!-- 第四幕：纸上随笔 -->
+      <section class="flow-section scene-essays" id="scene-4" aria-label="纸上随笔">
+        <div class="scene-shell">
+          <img
+            class="folio-watermark folio-watermark-essays"
+            id="s4Watermark"
+            src="./assets/watermark-essays.svg"
+            alt=""
+            aria-hidden="true"
+          />
+          <header class="section-head" id="s4Head">
+            <h2>纸上随笔</h2>
+            <p class="section-aside">关于 AI，关于审美，关于慢慢把一件事做好。</p>
+          </header>
+          <ol class="essay-grid" id="essayList"></ol>
+        </div>
+      </section>
+
+      <!-- 第五幕：联系与尾声 -->
+      <section class="flow-section scene-contact" id="scene-5" aria-label="联系 KeyCat 与尾声">
+        <div class="contact-atelier">
+          <div class="finale-hero" id="finaleHero">
+            <canvas
+              id="finaleBrushCanvas"
+              width="720"
+              height="164"
+              aria-label="朱砂毛笔手写 Say Hi. 呼应开篇签名，可自由在画布轻划留墨"
+            ></canvas>
+            <h2 class="finale-quote">
+              <span>一纸相逢，隔屏如晤，</span>
+              <span class="finale-quote-line2">欢迎随时来坐坐。</span>
+            </h2>
+          </div>
+
+          <ul class="social-showcase" id="socialList" aria-label="社交媒体账号"></ul>
+        </div>
+
+        <div class="finale-colophon">
+          <p class="colophon-line">KeyCat · 二〇二六 · 写于暖纸上</p>
+          <p class="colophon-credits">背景音乐 Kevin MacLeod（CC BY 4.0）· 字体 霞鹜文楷屏幕版（OFL 1.1）· 水印图标 Streamline Freehand（CC BY 4.0）· 键音调校参考 ThockHub</p>
+        </div>
+
+        <button type="button" class="back-top-sketch" id="backToTopBtn" data-scene-jump="0" title="回到最顶部">
+          <span class="back-top-label">回到顶部</span>
+          <img class="back-top-arrow" src="./assets/arrow-loop-hint.svg" alt="" aria-hidden="true" />
+        </button>
+      </section>
+    </div>
+  </main>
+
+  <!-- 唯一全站背景音乐开关：黑猫爪从屏幕下沿伸入（点击才播放） + 极简无界换碟触发 -->
+  <audio id="bgmAudio" src="./assets/audio/bgm-gymnopedie.mp3" loop preload="none"></audio>
+  <div class="bgm-swap-cluster" id="bgmSwapCluster">
+    <span class="bgm-track-toast" id="bgmTrackToast" aria-live="polite">01 · Gymnopédie No. 1</span>
+    <button
+      type="button"
+      class="bgm-swap-btn"
+      id="bgmSwapBtn"
+      aria-label="切换下一首背景音乐唱片"
+      title="换一张黑胶唱片切换背景音乐"
+    >
+      <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+        <path d="M3 3v5h5" />
+        <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+        <path d="M16 16h5v5" />
+      </svg>
+      <span id="bgmSwapText">换碟 · 1/4</span>
+    </button>
+  </div>
+  <button
+    type="button"
+    class="turntable-toggle"
+    id="bgmTurntable"
+    aria-pressed="false"
+    aria-label="播放背景纯音乐"
+    title="点击伸出猫爪播放背景纯音乐"
+  >
+    <span class="turntable-stage" aria-hidden="true">
+      <img class="turntable-disc" id="bgmDiscImg" src="./assets/vinyl-record.svg" alt="" />
+      <img class="turntable-paw" src="./assets/cat-paw.png" alt="" />
+    </span>
+  </button>
+
+  <!-- 纸页阅读层 -->
+  <div class="reader" id="reader" role="dialog" aria-modal="true" aria-labelledby="readerTitle" aria-hidden="true">
+    <div class="reader-progress" id="readerProgress" aria-hidden="true"></div>
+    <header class="reader-bar">
+      <span class="reader-index" id="readerIndex">01 / 04</span>
+      <div class="reader-controls">
+        <button type="button" class="reader-btn" id="readerFontToggle" title="切换正文字号">字号 · 适中</button>
+        <button type="button" class="reader-btn reader-close" id="readerClose">
+          <span>合上</span>
+          <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+      </div>
+    </header>
+    <article class="reader-sheet" id="readerBody"></article>
+    <nav class="reader-pager" aria-label="篇目切换">
+      <button type="button" class="reader-btn" id="readerPrev">
+        <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+        <span>上一篇</span>
+      </button>
+      <button type="button" class="reader-btn" id="readerNext">
+        <span>下一篇</span>
+        <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </button>
+    </nav>
+  </div>
+</body>
+</html>

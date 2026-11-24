@@ -1,0 +1,37 @@
+# AI / 编辑工具目录（不公开）
+.agent/
+.agents/
+.claude/
+.codex/
+.dsh/
+.gemini/
+.grok/
+.opencode/
+.impeccable/
+.cursor/
+
+# 生成产物
+exports/
+*.gif.tmp
+
+# 草稿（不公开）
+content/drafts/
+
+# 环境变量与密钥
+.env
+.env.*
+!.env.example
+.dev.vars
+*.pem
+*.key
+
+# 依赖与本地缓存
+node_modules/
+.wrangler/
+__pycache__/
+*.pyc
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
